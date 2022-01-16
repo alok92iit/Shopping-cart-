@@ -1,0 +1,60 @@
+<% layout('layouts/boilerPlate') -%>
+<div class="container">
+    <%-include('../partials/flash')%>
+    <div>
+    <section id="heading" class="d-flex justify-content-between">
+      <h4 class="display-4"><i class="fab fa-shopify" style="margin-right: 20px;"></i>Shopping-Cart</h4>
+ 
+    <!-- Example split danger button -->
+    <section>
+    <div class="btn-group ">
+    <label class="btn btn-sm btn-success">Category</label>
+    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="/products/filter/electronics">Electronics</a></li>
+      <li><a class="dropdown-item" href="/products/filter/jewelery">Jewelery</a></li>
+      <li><a class="dropdown-item" href="/products/filter/men">Men's clothing</a></li>
+      <li><a class="dropdown-item" href="/products/filter/women">Women's clothing</a></li>
+    </ul>
+    </div>
+  </section>
+  </section>
+          <div class="row products mt-4">
+            <%for(let product of products){%>
+                <div class="col-lg-3 mb-3">
+                    <div class="card text-center shadow-sm mx-auto px-1" style="width: 17rem;">
+                        <img src="<%=product.img%>" class="card-img-top" alt="item image">
+                        <div class="card-body">
+                        <h5  class="card-title d-flex  justify-content-between align-items-start fs-5 fw-bold">
+                          <span><%= product.name.substring(0,25) %>...</span>
+                          <span class="like-btn btn  bg-light rounded-circle" product-id="<%=product._id%>" style="box-shadow:0px 1px 1px rgba(0,0,0,0.26)">                        
+                            <%if(currentUsers && currentUsers.wishlist.includes(product._id)){%>    
+                               <i class="fas fa-heart"></i>
+                            <%}else{%>
+                              <i class="far fa-heart"></i>
+                            <%}%>
+                          </span>  
+                          </h5>
+                          <p class="card-text " style="font-size: small;"><%= product.desc.substring(0,50) %>... </p>
+                          <div class="d-flex justify-content-between">
+                            <p class="text-warning fw-bold mt-1">Best Seller  </p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mt-1 fw-light" style="font-size: smaller;">MRP:  ₹ </p>
+                                <h5 class="card-title mt-1" style="font-size: medium;">   <%= product.price %> </h5>
+                            </div>
+                          </div>
+                          
+                            <a href="/products/<%=product._id%>"class= "btn show-btn btn-success btn-sm" >Buy Now</a>
+                            
+                          
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/common.js"></script>

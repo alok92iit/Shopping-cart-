@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') -%>
+<section class="container">
+  <h1 class="display-6">My Cart</h1>
+    <div class="row">
+        <div class="col-lg-8">
+           <%if(user.cart.length ==0){%>
+          
+          <h1>Oops. Your cart is Empty</h1>
+          <%}else{%>  
+            <% for(let item of user.cart){%>
+                <div class="card mx-auto mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-4">
+                        <img src="<%=item.img%>" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-8">
+                        <div class="card-body">
+                          <h5 class="card-title"><%=item.name%></h5>
+                          <p class="card-text"><%=item.desc.substring(0,40)%></p>
+                          <form action="/user/<%=item._id%>/removeProduct" method="get">
+                            <button class=" btn btn-danger btn-sm float-end">Delete </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            <%} %> 
+        </div>
+        <div class="col-lg-4">
+            <ul class="list-group">
+                <% for(let item of user.cart) {%>
+                    <li class="list-group-item"><span class="fw-bold"><%=item.name.substring(0,30)%> - </span>₹ <%=item.price%> <span></span></li>
+                <% } %> 
+                <li class="total list-group-item fw-bold">Total Amount : ₹ <%=total%></li>
+            </ul>
+           <button id="checkout" class="btn btn-sm btn-success my-3">Checkout</button>
+        </div>
+        <%}%>
+    </div>
+
+   
+</section> 
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="/js/gateway.js"></script>
