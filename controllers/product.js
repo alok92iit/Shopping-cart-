@@ -85,8 +85,6 @@ module.exports.deleteProduct = async (req,res)=>{
 
     module.exports.filters =async (req,res)=>{
         const {selectedCategory}    =req.params
-        console.log({selectedCategory})
         const filteredData =await Product.find({category :selectedCategory })
-        console.log(filteredData)
         res.render("product/index" ,{products :filteredData})
     }

@@ -5,7 +5,6 @@ module.exports.showCart = async(req,res)=>{
    try { 
         const user = await User.findById(req.user._id).populate('cart')
         const total =await user.cart.reduce((previous,current)=> previous +current.price ,0)
-        console.log(user)
         res.render("cart/cart.ejs" ,{user ,total})
     }
     catch(e){
