@@ -24,8 +24,8 @@ module.exports.creatProduct =(req,res)=>{
 
 module.exports.addNewProduct =async (req,res)=>{
     try{
-        const {name ,price ,img ,desc} =req.body
-        await Product.create({name ,price,img  ,desc, author:req.user._id})
+        const {name ,price ,img ,category,desc } =req.body
+        await Product.create({name ,price,img  ,category,desc, author:req.user._id})
         req.flash("mymsg","Your product add successfully")
         res.redirect("products")
        
